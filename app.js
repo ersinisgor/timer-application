@@ -33,3 +33,37 @@ function start_counting() {
   document.getElementById('inputm').disabled = true;
   document.getElementById('inputs').disabled = true;
 }
+
+// pause the timer
+function pause_counting() {
+  // change the state of buttons and input fields to allow users to re-enter numbers
+  document.getElementById('btn-start').disabled = false;
+  document.getElementById('btn-pause').disabled = true;
+  document.getElementById('btn-stop').disabled = false;
+  document.getElementById('inputh').disabled = false;
+  document.getElementById('inputm').disabled = false;
+  document.getElementById('inputs').disabled = false;
+
+  // pause the timer
+  clearInterval(timer);
+}
+
+// stop the timer
+function end_counting() {
+  // change the state of buttons and input fields to allow users to re-enter numbers
+  document.getElementById('btn-start').disabled = false;
+  document.getElementById('btn-pause').disabled = true;
+  document.getElementById('btn-stop').disabled = true;
+  document.getElementById('inputh').disabled = false;
+  document.getElementById('inputm').disabled = false;
+  document.getElementById('inputs').disabled = false;
+
+  // stop the timer
+  clearInterval(timer);
+
+  // reset the time variables
+  h = 0;
+  m = 0;
+  s = 0;
+  document.getElementById('currentTime').innerHTML = 'Timer stopped';
+}
