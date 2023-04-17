@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer Application</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Timer</h1>
+      <div class="ipt">
+        <input id="inputh" type="number" placeholder="hour" />
+        <input id="inputm" type="number" placeholder="minute" />
+        <input id="inputs" type="number" placeholder="second" />
+      </div>
+      <div class="btn">
+        <button id="btn-start" onclick="start_counting()">Start</button>
+        <button id="btn-pause" onclick="pause_counting()">Pause</button>
+        <button id="btn-stop" onclick="end_counting()">Stop</button>
+      </div>
+      <p id="currentTime">current time:</p>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
