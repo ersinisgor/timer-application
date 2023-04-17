@@ -67,3 +67,49 @@ function end_counting() {
   s = 0;
   document.getElementById('currentTime').innerHTML = 'Timer stopped';
 }
+
+// countdown
+function counting() {
+  // check if the second is 0
+  if (s == 0) {
+    // check if the minute is 0 when the second is 0
+    if (m == 0) {
+      // the entered time has already been checked for legality before starting the timer, so there is no need to check the value of the variable h again here
+      h--;
+      m = 59;
+      s = 59;
+    } else {
+      // when the minute is not 0, the minute minus 1 and the second becomes 59
+      m--;
+      s = 59;
+    }
+  } else {
+    // when the second is not 0, the second minus 1
+    s--;
+  }
+
+  // display current time
+  document.getElementById('currentTime').innerHTML =
+    'current time: ' + h + ' h ' + m + ' m ' + s + ' s';
+  document.getElementById('inputh').value = h;
+  document.getElementById('inputm').value = m;
+  document.getElementById('inputs').value = s;
+
+  // check if the second is 0
+  if (s == 0) {
+    // when the second is 0, check if the minute is 0
+    if (m == 0) {
+      // when the minute is 0, check if the hour is 0
+      if (h == 0) {
+        // when the hour is 0, stop the timer
+        // stop the timer
+        end_counting();
+        // execute popup in the next event loop to prevent it from blocking DOM rendering
+        setTimeout(function () {
+          alert('The time is up!');
+        }, 0);
+        return;
+      }
+    }
+  }
+}
