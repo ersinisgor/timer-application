@@ -67,7 +67,7 @@ function end_counting() {
   s = 0;
   document.getElementById('currentTime').innerHTML = 'Timer stopped';
 
-  // document.querySelector('form').reset();
+  document.querySelector('form').reset();
 }
 
 // countdown
@@ -151,4 +151,92 @@ if (m.match(/^\d$/)) {
 if (s.match(/^\d$/)) {
   // If the second is a single digit, add 0 in the front
   s = '0' + s;
+}
+
+// Turn into OOP
+
+const t1 = new Timmer();
+t1.name = 'Timer 1';
+const t2 = new Timmer();
+t2.name = 'Timer 2';
+const list_timmer = [t1, t2];
+const list_sound = ['meow', 'woof'];
+class Timmer {
+  constructor() {
+    this.name = 'undefined';
+    this.timmer = undefined;
+    this.h = 0;
+    this.m = 0;
+    this.s = 10;
+
+    this._on_update_callback = undefined;
+    this._on_stop_callback = undefined;
+  }
+
+  _on_update() {
+    if (0 === this.h && 0 === this.m && 0 === this.s) {
+      this.stop();
+      return;
+    } else if (0 === this.s) {
+      this.s = 59;
+      if (0 === this.m) {
+        this.m = 59;
+        this.h = this.h - 1;
+      } else {
+        this.m = this.m - 1;
+      }
+    } else {
+      this.s = this.s - 1;
+    }
+
+    this.show();
+    if (0 === this.h && 0 === this.m && 0 === this.s) {
+      this.stop();
+    }
+
+    // call the external callback function if it exists
+    if (
+      this._on_update_callback &&
+      typeof this._on_update_callback === 'function'
+    ) {
+      this._on_update_callback();
+    }
+  }
+
+  start() {
+    if (this.timmer) {
+      console.log(`[${this.name}] started`);
+      return;
+    }
+    console.log(`[${this.name}] starts`);
+    this.timmer = setInterval(() => {
+      this._on_update();
+    }, 1000);
+    this.show();
+  }
+
+  stop() {
+    console.log(`[${this.name}] stopped`);
+    clearInterval(this.timmer);
+    this.timmer = undefined;
+
+    // smiliar to update, check for the stop callback function
+    if (
+      this._on_stop_callback &&
+      typeof this._on_stop_callback === 'function'
+    ) {
+      this._on_stop_callback();
+    }
+  }
+
+  pause() {
+    console.log(`[${this.name}] paused`);
+    clearInterval(this.timmer);
+    this.timmer = undefined;
+  }
+
+  show() {
+    // display the current time
+    console.log(`[${this.name}] current time: ${this.h}:${this.m}:${this.s}`);
+  }
 }
