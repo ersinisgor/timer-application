@@ -66,6 +66,8 @@ function end_counting() {
   m = 0;
   s = 0;
   document.getElementById('currentTime').innerHTML = 'Timer stopped';
+
+  // document.querySelector('form').reset();
 }
 
 // countdown
@@ -112,4 +114,41 @@ function counting() {
       }
     }
   }
+}
+
+var inputh = document.getElementById('inputh');
+inputh.addEventListener('input', function () {
+  inputh.value = parseInt(inputh.value || 0);
+  if (inputh.value > 24) inputh.value = 24;
+  if (inputh.value < 0) inputh.value = 0;
+});
+
+var inputm = document.getElementById('inputm');
+inputm.addEventListener('input', function () {
+  inputm.value = parseInt(inputm.value || 0);
+  if (inputm.value > 59) inputm.value = 59;
+  if (inputm.value < 0) inputm.value = 0;
+});
+
+var inputs = document.getElementById('inputs');
+inputs.addEventListener('input', function () {
+  inputs.value = parseInt(inputs.value || 0);
+  if (inputs.value > 59) inputs.value = 59;
+  if (inputs.value < 0) inputs.value = 0;
+});
+
+h = h.toString();
+m = m.toString();
+s = s.toString();
+if (h.match(/^\d$/)) {
+  // If the hour is a single digit, add 0 in the front
+  h = '0' + h;
+}
+if (m.match(/^\d$/)) {
+  // If the minute is a single digit, add 0 in the front
+  m = '0' + m;
+}
+if (s.match(/^\d$/)) {
+  // If the second is a single digit, add 0 in the front
+  s = '0' + s;
 }
